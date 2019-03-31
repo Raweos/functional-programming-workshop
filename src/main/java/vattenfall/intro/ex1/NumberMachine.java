@@ -2,7 +2,6 @@ package vattenfall.intro.ex1;
 
 
 import java.util.List;
-import java.util.function.Predicate;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
@@ -18,19 +17,11 @@ final class NumberMachine {
         this.numbers = numbers;
     }
 
-    //Convert me into lambda
     List<Integer> getEven() {
-        return numbers.stream().filter(new Predicate<Integer>() {
-            @Override
-            public boolean test(Integer integer) {
-                return integer % 2 == 0;
-            }
-        }).collect(toList());
+        return numbers.stream().filter(number -> number % 2 == 0).collect(toList());
     }
 
     void printValues() {
-        for (Integer number : numbers) {
-            System.out.println(number);
-        }
+        numbers.forEach(System.out::println);
     }
 }

@@ -14,7 +14,6 @@ class StringConcatenator {
     }
 
     Supplier<String> concatenate(ConcatenationFunction concatenationFunction) {
-        throw new UnsupportedOperationException("To be implemented");
+        return () -> concatenationFunction.apply(string1, string2, string3);
     }
-
 }

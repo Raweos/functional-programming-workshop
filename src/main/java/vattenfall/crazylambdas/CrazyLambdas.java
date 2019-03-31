@@ -1,6 +1,7 @@
 package vattenfall.crazylambdas;
 
 import java.math.BigDecimal;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.*;
 
 class CrazyLambdas {
@@ -11,7 +12,7 @@ class CrazyLambdas {
      * @return a string supplier
      */
     static Supplier<String> helloSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> "Hello";
     }
 
     /**
@@ -20,7 +21,7 @@ class CrazyLambdas {
      * @return a string predicate
      */
     static Predicate<String> isEmptyPredicate() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return String::isEmpty;
     }
 
     /**
@@ -30,7 +31,7 @@ class CrazyLambdas {
      * @return function that converts adds dollar sign
      */
     static Function<BigDecimal, String> toDollarStringFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return bigDecimal -> "$" + bigDecimal.toString();
     }
 
     /**
@@ -42,7 +43,7 @@ class CrazyLambdas {
      * @return a string predicate
      */
     static Predicate<String> lengthInRangePredicate(int min, int max) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return s -> s.length() >= min && s.length() <= max;
     }
 
     /**
@@ -51,7 +52,7 @@ class CrazyLambdas {
      * @return int supplier
      */
     static IntSupplier randomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> ThreadLocalRandom.current().nextInt();
     }
 
 
@@ -61,7 +62,7 @@ class CrazyLambdas {
      * @return int operation
      */
     static IntUnaryOperator boundedRandomIntSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return bound -> ThreadLocalRandom.current().nextInt(bound);
     }
 
     /**
@@ -70,7 +71,7 @@ class CrazyLambdas {
      * @return square operation
      */
     static IntUnaryOperator intSquareOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return number -> number * number;
     }
 
     /**
@@ -79,7 +80,7 @@ class CrazyLambdas {
      * @return binary sum operation
      */
     static LongBinaryOperator longSumOperation() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return (a, b) -> a + b;
     }
 
     /**
@@ -88,7 +89,7 @@ class CrazyLambdas {
      * @return string to int converter
      */
     static ToIntFunction<String> stringToIntConverter() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Integer::valueOf;
     }
 
     /**
@@ -99,7 +100,7 @@ class CrazyLambdas {
      * @return a function supplier
      */
     static Supplier<IntUnaryOperator> nMultiplyFunctionSupplier(int n) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> a -> n * a;
     }
 
     /**
@@ -110,7 +111,11 @@ class CrazyLambdas {
      * @return a thread supplier
      */
     static Supplier<Thread> runningThreadSupplier(Runnable runnable) {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return () -> {
+            Thread thread = new Thread(runnable);
+            thread.start();
+            return thread;
+        };
     }
 
     /**
@@ -119,7 +124,7 @@ class CrazyLambdas {
      * @return a runnable consumer
      */
     static Consumer<Runnable> newThreadRunnableConsumer() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return Runnable::run;
     }
 
     /**
@@ -129,7 +134,11 @@ class CrazyLambdas {
      * @return a function that transforms runnable into a thread supplier
      */
     static Function<Runnable, Supplier<Thread>> runnableToThreadSupplierFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return runnable -> () -> {
+            Thread thread = new Thread(runnable);
+            thread.start();
+            return thread;
+        };
     }
 
     /**
@@ -142,7 +151,7 @@ class CrazyLambdas {
      * @return a binary function that receiver predicate and function and compose them to create a new function
      */
     static BiFunction<IntUnaryOperator, IntPredicate, IntUnaryOperator> functionToConditionalFunction() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+        return (intUnaryOperator, intPredicate) -> a -> intPredicate.test(a) ? intUnaryOperator.applyAsInt(a) : a;
     }
 
     /**
@@ -151,7 +160,7 @@ class CrazyLambdas {
      * @return a supplier instance
      */
     static Supplier<Supplier<Supplier<String>>> trickyWellDoneSupplier() {
-        throw new UnsupportedOperationException("It's your job to implement this method"); // todo
+       return  () -> () -> () -> "WELL DONE!";
     }
 }
 
