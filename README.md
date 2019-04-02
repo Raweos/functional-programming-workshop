@@ -1,0 +1,1 @@
+Java functional programming workshop based on https://github.com/bobocode-projects/java-functional-features-exercises
